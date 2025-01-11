@@ -80,14 +80,14 @@ class block_quranplayer extends block_base {
     <select id="quranplayer-select">
         $options
     </select>
-    <audio id="quranplayer" controls>
-        <source id="quranplayer-source" src="" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
     <div id="quran-text">
         <h3>{$this->title}</h3>
         <pre id="quran-content"></pre>
     </div>
+    <audio id="quranplayer" controls>
+        <source id="quranplayer-source" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </div>
 <script>
     const select = document.getElementById('quranplayer-select');
