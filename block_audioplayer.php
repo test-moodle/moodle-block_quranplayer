@@ -20,19 +20,29 @@ class block_audioplayer extends block_base {
     }
 
     private function render_audio_player() {
-        $mp3path = __DIR__ . '/mp3/';
-        $files = array_diff(scandir($mp3path), ['..', '.']); // Fetch MP3 files
-        $options = '';
+        global $CFG;
 
-        foreach ($files as $file) {
-            $filename = pathinfo($file, PATHINFO_FILENAME);
-            $options .= "<option value='$file'>$filename</option>";
+        $mp3path = $CFG->dirroot . '/blocks/audioplayer/mp3/';
+        if (!is_dir($mp3path)) {
+            return '<div class="alert alert-error">' . get_string('nodirectory', 'block_audioplayer') . '</div>';
         }
 
-        // Render HTML for the audio player
+        $files = array_diff(scandir($mp3path), ['..', '.']);
+        if (empty($files)) {
+            return '<div class="alert alert-warning">' . get_string('noaudiofiles', 'block_audioplayer') . '</div>';
+        }
+
+        $options = '';
+        foreach ($files as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'mp3') {
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+                $options .= "<option value='$file'>$filename</option>";
+            }
+        }
+
         $html = <<<HTML
 <div>
-    <label for="audioplayer-select">Select a chapter to play:</label>
+    <label for="audioplayer-select">{$this->title}</label>
     <select id="audioplayer-select">
         $options
     </select>
@@ -40,15 +50,35 @@ class block_audioplayer extends block_base {
         <source id="audioplayer-source" src="" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <div id="quran-text">
+        <h3>{$this->title}</h3>
+        <pre id="quran-content"></pre>
+    </div>
 </div>
 <script>
     const select = document.getElementById('audioplayer-select');
     const audio = document.getElementById('audioplayer');
     const source = document.getElementById('audioplayer-source');
+    const quranContent = document.getElementById('quran-content');
+
     select.addEventListener('change', function() {
-        source.src = 'block_audioplayer/mp3/' + this.value;
+        const selectedFile = this.value;
+        source.src = '{$CFG->wwwroot}/blocks/audioplayer/mp3/' + selectedFile;
         audio.load();
+
+        // Fetch Quran text for the selected file
+        fetch('{$CFG->wwwroot}/blocks/audioplayer/get_quran_text.php?file=' + selectedFile)
+            .then(response => response.text())
+            .then(text => {
+                quranContent.textContent = text;
+            })
+            .catch(error => {
+                quranContent.textContent = 'Failed to load Quran text.';
+            });
     });
+
+    // Trigger change event to load the first file's text on page load
+    select.dispatchEvent(new Event('change'));
 </script>
 HTML;
 
