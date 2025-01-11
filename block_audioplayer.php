@@ -16,10 +16,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-class block_audioplayer extends block_base {
+class block_quranplayer extends block_base {
 
     public function init() {
-        $this->title = get_string('audioplayer', 'block_audioplayer');
+        $this->title = get_string('quranplayer', 'block_quranplayer');
     }
 
     public function get_content() {
@@ -37,14 +37,14 @@ class block_audioplayer extends block_base {
     private function render_audio_player() {
         global $CFG;
 
-        $mp3path = $CFG->dirroot . '/blocks/audioplayer/mp3/';
+        $mp3path = $CFG->dirroot . '/blocks/quranplayer/mp3/';
         if (!is_dir($mp3path)) {
-            return '<div class="alert alert-error">' . get_string('nodirectory', 'block_audioplayer') . '</div>';
+            return '<div class="alert alert-error">' . get_string('nodirectory', 'block_quranplayer') . '</div>';
         }
 
         $files = array_diff(scandir($mp3path), ['..', '.']);
         if (empty($files)) {
-            return '<div class="alert alert-warning">' . get_string('noaudiofiles', 'block_audioplayer') . '</div>';
+            return '<div class="alert alert-warning">' . get_string('noaudiofiles', 'block_quranplayer') . '</div>';
         }
 
         // List of Quran chapter names
@@ -76,12 +76,12 @@ class block_audioplayer extends block_base {
 
         $html = <<<HTML
 <div>
-    <label for="audioplayer-select">{$this->title}</label>
-    <select id="audioplayer-select">
+    <label for="quranplayer-select">{$this->title}</label>
+    <select id="quranplayer-select">
         $options
     </select>
-    <audio id="audioplayer" controls>
-        <source id="audioplayer-source" src="" type="audio/mpeg">
+    <audio id="quranplayer" controls>
+        <source id="quranplayer-source" src="" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <div id="quran-text">
@@ -90,17 +90,17 @@ class block_audioplayer extends block_base {
     </div>
 </div>
 <script>
-    const select = document.getElementById('audioplayer-select');
-    const audio = document.getElementById('audioplayer');
-    const source = document.getElementById('audioplayer-source');
+    const select = document.getElementById('quranplayer-select');
+    const audio = document.getElementById('quranplayer');
+    const source = document.getElementById('quranplayer-source');
     const quranContent = document.getElementById('quran-content');
 
     select.addEventListener('change', function() {
         const selectedFile = this.value;
-        source.src = '{$CFG->wwwroot}/blocks/audioplayer/mp3/' + encodeURIComponent(selectedFile);
+        source.src = '{$CFG->wwwroot}/blocks/quranplayer/mp3/' + encodeURIComponent(selectedFile);
         audio.load();
 
-        fetch('{$CFG->wwwroot}/blocks/audioplayer/get_quran_text.php?file=' + encodeURIComponent(selectedFile))
+        fetch('{$CFG->wwwroot}/blocks/quranplayer/get_quran_text.php?file=' + encodeURIComponent(selectedFile))
             .then(response => response.text())
             .then(text => {
                 quranContent.textContent = text;

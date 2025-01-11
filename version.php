@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_audioplayer';
+$plugin->component = 'block_quranplayer';
 $plugin->version = 2025011001; // YYYYMMDDXX
 $plugin->requires = 2020110900; // Minimum Moodle version
 $plugin->maturity = MATURITY_STABLE;

@@ -1,10 +1,10 @@
-/* Audio Player block styles */
-#audioplayer {
+/* Quran Player block styles */
+#quranplayer {
     width: 100%;
     margin-top: 10px;
 }
 
-#audioplayer-select {
+#quranplayer-select {
     width: 100%;
     margin-bottom: 10px;
     padding: 8px;

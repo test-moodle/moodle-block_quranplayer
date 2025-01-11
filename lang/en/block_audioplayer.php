@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-$string['pluginname'] = 'Audio Player';
-$string['audioplayer'] = 'Audio Player';
-$string['audioplayer:addinstance'] = 'Add a new Audio Player block';
-$string['audioplayer:myaddinstance'] = 'Add a new Audio Player block to My Moodle';
+$string['pluginname'] = 'Quran Player';
+$string['quranplayer'] = 'Quran Player';
+$string['quranplayer:addinstance'] = 'Add a new Quran Player block';
+$string['quranplayer:myaddinstance'] = 'Add a new Quran Player block to My Moodle';
 $string['selectfile'] = 'Select a chapter to play:';
 $string['qurantext'] = 'Quran Text';
 $string['noaudiofiles'] = 'No audio files found.';

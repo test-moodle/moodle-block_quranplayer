@@ -17,14 +17,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
-    'block/audioplayer:myaddinstance' => [
+    'block/quranplayer:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'user' => CAP_ALLOW,
         ],
     ],
-    'block/audioplayer:addinstance' => [
+    'block/quranplayer:addinstance' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,

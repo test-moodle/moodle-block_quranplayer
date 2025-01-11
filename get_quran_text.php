@@ -21,7 +21,7 @@ $file = optional_param('file', '', PARAM_TEXT);
 $quranfile = __DIR__ . '/quran.txt';
 
 if (!file_exists($quranfile)) {
-    echo get_string('noqurantext', 'block_audioplayer');
+    echo get_string('noqurantext', 'block_quranplayer');
     exit;
 }
 
@@ -41,7 +41,7 @@ foreach ($lines as $line) {
 }
 
 if (empty($selectedText)) {
-    echo get_string('noqurantext', 'block_audioplayer');
+    echo get_string('noqurantext', 'block_quranplayer');
 } else {
     echo $selectedText;
 }
