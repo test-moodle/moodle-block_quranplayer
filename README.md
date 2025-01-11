@@ -1,7 +1,7 @@
 
-# Moodle Audio Player Block Plugin 🎧
+# Quran Player Moodle Block Plugin 🎧🕌
 
-The **Audio Player Block Plugin** is a Moodle block designed to enhance the learning experience by integrating an audio player for Quran chapters directly into Moodle courses. This plugin allows users to play Quran audio files and display the corresponding Quran text alongside the audio.
+The **Quran Player Block Plugin** is a Moodle block designed to enhance the learning experience by integrating an audio player for Quran chapters directly into Moodle courses. This plugin allows users to play Quran audio files and display the corresponding Quran text alongside the audio.
 
 ## Features ✨
 - **Audio Player**: Play Quran chapters directly in Moodle.
@@ -9,6 +9,8 @@ The **Audio Player Block Plugin** is a Moodle block designed to enhance the lear
 - **Easy Integration**: Add the block to any Moodle course or dashboard.
 - **Customizable**: Easily customize the player's appearance using CSS.
 - **Error Handling**: Gracefully handles missing files or directories.
+
+---
 
 ## Installation 🛠️
 
@@ -21,13 +23,13 @@ The **Audio Player Block Plugin** is a Moodle block designed to enhance the lear
 1. **Download the Plugin**:
    - Clone this repository or download the ZIP file.
    ```bash
-   git clone https://github.com/maysaraadmin/block_audioplayer.git
+   git clone https://github.com/maysaraadmin/quranplayer.git
    ```
 
 2. **Install the Plugin**:
-   - Copy the `block_audioplayer` folder to your Moodle `blocks` directory:
+   - Copy the `quranplayer` folder to your Moodle `blocks` directory:
      ```
-     moodle/blocks/block_audioplayer
+     moodle/blocks/quranplayer
      ```
 
 3. **Install via Moodle**:
@@ -38,14 +40,14 @@ The **Audio Player Block Plugin** is a Moodle block designed to enhance the lear
 4. **Add MP3 Files**:
    - Place your Quran audio files (in MP3 format) in the `mp3` directory:
      ```
-     moodle/blocks/block_audioplayer/mp3/
+     moodle/blocks/quranplayer/mp3/
      ```
    - Ensure the files are named sequentially (e.g., `001.mp3`, `002.mp3`, etc.).
 
 5. **Add Quran Text**:
    - Place the `quran.txt` file in the plugin directory:
      ```
-     moodle/blocks/block_audioplayer/quran.txt
+     moodle/blocks/quranplayer/quran.txt
      ```
    - The file should contain Quran text in the format:
      ```
@@ -56,12 +58,14 @@ The **Audio Player Block Plugin** is a Moodle block designed to enhance the lear
      1|1|بسم الله الرحمن الرحيم
      ```
 
+---
+
 ## Usage 🎯
 
 1. **Add the Block**:
    - Go to the course or dashboard where you want to add the block.
    - Turn editing on and click **"Add a block"**.
-   - Select **"Audio Player"** from the list of blocks.
+   - Select **"Quran Player"** from the list of blocks.
 
 2. **Select a Chapter**:
    - Use the dropdown menu to select a Quran chapter.
@@ -70,10 +74,12 @@ The **Audio Player Block Plugin** is a Moodle block designed to enhance the lear
 3. **Customize the Player**:
    - You can customize the appearance of the player by editing the `styles.css` file in the plugin directory.
 
+---
+
 ## Screenshots 📸
 
-![Audio Player Block](screenshots/audioplayer.png)
-*The Audio Player Block in action, displaying the Quran text and audio player.*
+![Quran Player Block](screenshots/quranplayer.png)
+*The Quran Player Block in action, displaying the Quran text and audio player.*
 
 ---
 
@@ -87,7 +93,7 @@ We welcome contributions from the community! Whether you're a developer, tester,
 
 2. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/block_audioplayer.git
+   git clone https://github.com/your-username/quranplayer.git
    ```
 
 3. **Create a Branch**:
@@ -118,7 +124,7 @@ This plugin is released under the **GNU General Public License v3.0**. See the [
 ## Support and Feedback 💬
 
 If you encounter any issues or have suggestions for improvement, please:
-- Open an issue on [GitHub](https://github.com/maysaraadmin/block_audioplayer/issues).
+- Open an issue on [GitHub](https://github.com/maysaraadmin/quranplayer/issues).
 - Reach out to me via email or LinkedIn.
 
 Let’s make this plugin even better together! 🌟
@@ -132,6 +138,5 @@ Let’s make this plugin even better together! 🌟
 
 ---
 
-🔗 **GitHub Repository**: [https://github.com/maysaraadmin/block_audioplayer](https://github.com/maysaraadmin/block_audioplayer)
+🔗 **GitHub Repository**: [https://github.com/maysaraadmin/quranplayer](https://github.com/maysaraadmin/quranplayer)
 
----
