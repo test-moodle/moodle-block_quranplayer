@@ -32,11 +32,30 @@ class block_audioplayer extends block_base {
             return '<div class="alert alert-warning">' . get_string('noaudiofiles', 'block_audioplayer') . '</div>';
         }
 
+        // List of Quran chapter names
+        $quranChapters = [
+            "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
+            "هود", "يوسف", "الرعد", "ابراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
+            "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
+            "لقمان", "السجدة", "الأحزاب", "سبإ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+            "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق",
+            "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة",
+            "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج",
+            "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الانسان", "المرسلات", "النبإ", "النازعات", "عبس",
+            "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
+            "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
+            "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
+            "المسد", "الإخلاص", "الفلق", "الناس"
+        ];
+
         $options = '';
         foreach ($files as $file) {
             if (pathinfo($file, PATHINFO_EXTENSION) === 'mp3') {
-                $filename = pathinfo($file, PATHINFO_FILENAME);
-                $options .= "<option value='$file'>$filename</option>";
+                $surahNumber = intval(pathinfo($file, PATHINFO_FILENAME)); // Extract surah number from file name (e.g., 001.mp3 -> 1)
+                if ($surahNumber >= 1 && $surahNumber <= 114) {
+                    $surahName = $quranChapters[$surahNumber - 1]; // Get surah name from the list
+                    $options .= "<option value='$file'>$surahNumber. $surahName</option>";
+                }
             }
         }
 
@@ -66,8 +85,7 @@ class block_audioplayer extends block_base {
         source.src = '{$CFG->wwwroot}/blocks/audioplayer/mp3/' + selectedFile;
         audio.load();
 
-        // Fetch Quran text for the selected file
-        fetch('{$CFG->wwwroot}/blocks/audioplayer/get_quran_text.php?file=' + selectedFile)
+        fetch('{$CFG->wwwroot}/blocks/audioplayer/get_quran_text.php?file=' + encodeURIComponent(selectedFile))
             .then(response => response.text())
             .then(text => {
                 quranContent.textContent = text;
@@ -77,7 +95,6 @@ class block_audioplayer extends block_base {
             });
     });
 
-    // Trigger change event to load the first file's text on page load
     select.dispatchEvent(new Event('change'));
 </script>
 HTML;

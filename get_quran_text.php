@@ -6,17 +6,27 @@ $file = optional_param('file', '', PARAM_TEXT);
 $quranfile = __DIR__ . '/quran.txt';
 
 if (!file_exists($quranfile)) {
-    die('Quran text file not found.');
+    echo get_string('noqurantext', 'block_audioplayer');
+    exit;
 }
+
+// Extract surah number from the file name (e.g., 001.mp3 -> 1)
+$surahNumber = intval(pathinfo($file, PATHINFO_FILENAME));
 
 $qurantext = file_get_contents($quranfile);
 $lines = explode("\n", $qurantext);
 
 $selectedText = '';
 foreach ($lines as $line) {
-    if (strpos($line, $file) !== false) {
-        $selectedText .= $line . "\n";
+    // Each line is in the format "surah|verse|text"
+    list($lineSurah, $lineVerse, $text) = explode('|', $line, 3);
+    if ($lineSurah == $surahNumber) {
+        $selectedText .= "$lineVerse. $text\n";
     }
 }
 
-echo $selectedText;
+if (empty($selectedText)) {
+    echo get_string('noqurantext', 'block_audioplayer');
+} else {
+    echo $selectedText;
+}
