@@ -14,7 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Fetches Quran text for a given chapter.
+ *
+ * @package    block_quranplayer
+ * @copyright  2024 Maysara Mohamed 
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require_once('../../config.php');
+require_login();
+
 defined('MOODLE_INTERNAL') || die();
 
 $file = optional_param('file', '', PARAM_TEXT);
@@ -25,23 +35,23 @@ if (!file_exists($quranfile)) {
     exit;
 }
 
-// Extract surah number from the file name (e.g., 001.mp3 -> 1)
-$surahNumber = intval(pathinfo($file, PATHINFO_FILENAME));
+// Extract surah number from the file name.
+$surahnumber = intval(pathinfo($file, PATHINFO_FILENAME));
 
 $qurantext = file_get_contents($quranfile);
 $lines = explode("\n", $qurantext);
 
-$selectedText = '';
+$selectedtext = '';
 foreach ($lines as $line) {
-    // Each line is in the format "surah|verse|text"
-    list($lineSurah, $lineVerse, $text) = explode('|', $line, 3);
-    if ($lineSurah == $surahNumber) {
-        $selectedText .= "$lineVerse. $text\n";
+    // Each line is in the format "surah|verse|text".
+    list($linesurah, $lineverse, $text) = explode('|', $line, 3);
+    if ($linesurah == $surahnumber) {
+        $selectedtext .= "$lineverse. $text\n";
     }
 }
 
-if (empty($selectedText)) {
+if (empty($selectedtext)) {
     echo get_string('noqurantext', 'block_quranplayer');
 } else {
-    echo $selectedText;
+    echo $selectedtext;
 }

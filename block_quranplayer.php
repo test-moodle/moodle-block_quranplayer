@@ -14,14 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Quran Player block.
+ *
+ * @package    block_quranplayer
+ * @copyright  2024 Maysara Mohamed
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Quran Player block class.
+ *
+ * @package    block_quranplayer
+ * @copyright  2024 Maysara Mohamed 
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_quranplayer extends block_base {
 
+    /**
+     * Initializes the block.
+     */
     public function init() {
         $this->title = get_string('quranplayer', 'block_quranplayer');
     }
 
+    /**
+     * Gets the block content.
+     *
+     * @return stdClass
+     */
     public function get_content() {
         if ($this->content !== null) {
             return $this->content;
@@ -34,6 +57,11 @@ class block_quranplayer extends block_base {
         return $this->content;
     }
 
+    /**
+     * Renders the audio player.
+     *
+     * @return string
+     */
     private function render_audio_player() {
         global $CFG;
 
@@ -47,8 +75,8 @@ class block_quranplayer extends block_base {
             return '<div class="alert alert-warning">' . get_string('noaudiofiles', 'block_quranplayer') . '</div>';
         }
 
-        // List of Quran chapter names
-        $quranChapters = [
+        // List of Quran chapter names.
+        $quranchapters = [
             "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
             "هود", "يوسف", "الرعد", "ابراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
             "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
@@ -60,16 +88,16 @@ class block_quranplayer extends block_base {
             "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
             "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
             "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
-            "المسد", "الإخلاص", "الفلق", "الناس"
+            "المسد", "الإخلاص", "الفلق", "الناس",
         ];
 
         $options = '';
         foreach ($files as $file) {
             if (pathinfo($file, PATHINFO_EXTENSION) === 'mp3') {
-                $surahNumber = intval(pathinfo($file, PATHINFO_FILENAME)); // Extract surah number from file name (e.g., 001.mp3 -> 1)
-                if ($surahNumber >= 1 && $surahNumber <= 114) {
-                    $surahName = $quranChapters[$surahNumber - 1]; // Get surah name from the list
-                    $options .= "<option value='" . s($file) . "'>$surahNumber. $surahName</option>";
+                $surahnumber = intval(pathinfo($file, PATHINFO_FILENAME)); // Extract surah number from file name.
+                if ($surahnumber >= 1 && $surahnumber <= 114) {
+                    $surahname = $quranchapters[$surahnumber - 1]; // Get surah name from the list.
+                    $options .= "<option value='" . s($file) . "'>$surahnumber. $surahname</option>";
                 }
             }
         }

@@ -14,6 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Language strings for the Quran Player block.
+ *
+ * @package    block_quranplayer
+ * @copyright  2024 Maysara Mohamed 
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
 $string['pluginname'] = 'Quran Player';
 $string['quranplayer'] = 'Quran Player';
 $string['quranplayer:addinstance'] = 'Add a new Quran Player block';
